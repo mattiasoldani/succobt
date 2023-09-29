@@ -1,0 +1,3 @@
+events before removing broken silicon data:	1788
+events after removing broken silicon data:	1776
+events after applying fiducial box:	665
