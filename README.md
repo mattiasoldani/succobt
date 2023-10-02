@@ -21,3 +21,5 @@ The analysis runs in a Jupyter notebook, `wf_analysis_preliminary.ipynb`. If exp
 The analysis dependencies are:
 
 [![python](https://img.shields.io/badge/python-3-blue.svg)](https://www.python.org/) [![awkward](https://img.shields.io/badge/awkward-grey.svg)](https://awkward-array.org/doc/main/) [![jupyterlab](https://img.shields.io/badge/jupyterlab-grey.svg)](https://jupyterlab.readthedocs.io/en/stable/) [![matplotlib](https://img.shields.io/badge/matplotlib-grey.svg)](https://matplotlib.org/) [![numpy](https://img.shields.io/badge/numpy-grey.svg)](https://numpy.org/) [![pip](https://img.shields.io/badge/pip-grey.svg)](https://pip.pypa.io/en/stable/) [![scipy](https://img.shields.io/badge/scipy-grey.svg)](https://www.scipy.org/)  [![succolib](https://img.shields.io/badge/succolib-grey.svg)](https://github.com/mattiasoldani/succolib) [![uproot](https://img.shields.io/badge/uproot-grey.svg)](https://github.com/scikit-hep/uproot) 
+
+Found a bug? Or simply have any questions, comments or suggestions you'd like to talk about? Feel free to contact me at <mattiasoldani93@gmail.com>. And brace yourself, for the best is yet to come!
