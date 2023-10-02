@@ -19,3 +19,5 @@ Either way, the core of the event reconstruction is in the `asciinroot_to_root_p
 The analysis runs in a Jupyter notebook, `wf_analysis_preliminary.ipynb`. If explicitly required in the notebook, all the generated output (plots and text files) go into the `output/` folder.
 
 The analysis dependencies are:
+
+[![awkward](https://img.shields.io/badge/awkward-grey.svg)](https://awkward-array.org/doc/main/) [![jupyterlab](https://img.shields.io/badge/jupyterlab-grey.svg)](https://jupyterlab.readthedocs.io/en/stable/) [![matplotlib](https://img.shields.io/badge/matplotlib-grey.svg)](https://matplotlib.org/) [![numpy](https://img.shields.io/badge/numpy-grey.svg)](https://numpy.org/) [![pip](https://img.shields.io/badge/pip-grey.svg)](https://pip.pypa.io/en/stable/) [![scipy](https://img.shields.io/badge/scipy-grey.svg)](https://www.scipy.org/)  [![succolib](https://img.shields.io/badge/succolib-grey.svg)](https://github.com/mattiasoldani/succolib) [![uproot](https://img.shields.io/badge/uproot-grey.svg)](https://github.com/scikit-hep/uproot) 
