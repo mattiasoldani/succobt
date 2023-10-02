@@ -16,4 +16,6 @@ Either way, the core of the event reconstruction is in the `asciinroot_to_root_p
 
 ### Notes on `wf_analysis_preliminary/`
 
+The analysis runs in a Jupyter notebook, `wf_analysis_preliminary.ipynb`. If explicitly required in the notebook, all the generated output (plots and text files) go into the `output/` folder.
 
+The analysis dependencies are:
