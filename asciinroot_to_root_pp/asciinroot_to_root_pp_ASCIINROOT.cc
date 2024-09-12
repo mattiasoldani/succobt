@@ -14,7 +14,7 @@
 #include "TFile.h"
 #include "TTree.h"
 
-void ascii_to_root_pp_ASCIINROOT_BACKUP(string inFileName="", string outFileName="", string inFileNameTree="") {
+void ascii_to_root_pp_ASCIINROOT(string inFileName="", string outFileName="", string inFileNameTree="") {
 
 std::cout<<"--> converting file "<<inFileName<<std::endl;
 std::cout<<"-->       into file "<<outFileName<<std::endl;
