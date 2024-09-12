@@ -45,13 +45,6 @@ const int lWfFast2 = 1024 ;
 const int lWfFastDummyPre = 2 ;
 const int lWfFastDummyPost = 2 ;
 
-// OPEN INPUT TEXT FILE
-std::cout<<"--> opening input ASCII"<<std::endl;
-ifstream myfile;
-string line;
-Int_t lineNumber=0;
-myfile.open(inFileName.c_str()); 
-
 // OPEN INPUT ROOT FILE(S) AND GET TREE(S)
 std::cout<<"--> opening input trees"<<std::endl;
 Int_t dummy=0;
