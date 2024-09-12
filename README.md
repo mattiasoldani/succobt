@@ -7,7 +7,7 @@ This is **succobt**, a set of tools for early manipulation and online analysis o
 
 ### Notes on `asciinroot_to_root_pp/`
 
-This projects was developed starting from the [TBtools](https://baltig.infn.it/insulab/tbtools) project (on GitLab) by [vmascagna](https://baltig.infn.it/mascagna), to whom I am deeply indebited.
+This project was developed starting from the [TBtools](https://baltig.infn.it/insulab/tbtools) project (on GitLab) by [vmascagna](https://baltig.infn.it/mascagna), to whom I am deeply indebited.
 
 Two versions of the tool are available:
 
