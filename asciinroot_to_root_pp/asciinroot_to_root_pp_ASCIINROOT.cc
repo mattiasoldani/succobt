@@ -27,7 +27,7 @@ std::cout<<"-->       into file "<<outFileName<<std::endl;
 
 const int nDigiCh0 = 32 ;
 const int nDigiCh1 = 32 ;
-const int nDigiCh2 = 8 ;
+const int nDigiCh2 = 0 ;
 const int nDigiCh = nDigiCh0+nDigiCh1+nDigiCh2 ;
 const int lWf0 = 1024 ;
 const int lWf1 = 1024 ;
@@ -46,7 +46,7 @@ const int lWfFastDummyPre = 2 ;
 const int lWfFastDummyPost = 2 ;
 
 const int nSiliPlanes = 4 ;
-const int nGonio = 0 ;
+const int nGonio = 5 ;
 
 // OPEN INPUT TEXT FILE
 std::cout<<"--> opening input ASCII"<<std::endl;
@@ -62,7 +62,7 @@ Int_t treevt=0;
 TFile* inFileTree = new TFile(inFileNameTree.c_str());
 TTree* ntree0=(TTree*)inFileTree->Get("h3");  // #0 - 1742
 TTree* ntree1=(TTree*)inFileTree->Get("h4");  // #1 - 1742
-TTree* ntree2=(TTree*)inFileTree->Get("h2");  // #2 - 1730
+//TTree* ntree2=(TTree*)inFileTree->Get("h2");  // #2 - 1730
 
 // CREATE OUTPUT TREE AND ROOT FILE
 std::cout<<"--> opening output file"<<std::endl;
@@ -77,11 +77,11 @@ Int_t iTime;
 Int_t iATime;
 Int_t eventNumber;
 Int_t ntEv;
+Int_t iDummy;
+Int_t iScan;
 
-t->Branch("iTime",&iTime,"iTime/I");
-t->Branch("iATime",&iATime,"iATime/I");
 t->Branch("eventNumber",&eventNumber,"eventNumber/I");
-t->Branch("ntEv",&ntEv,"ntEv/I"); 
+t->Branch("iScan",&iScan,"iScan/I"); 
 
 // >>> SILICON TRACKERS - FROM ASCII
 Float_t xRaw[nSiliPlanes];
@@ -93,9 +93,9 @@ t->Branch("nStripHit",nStripHit,Form("nStripHit[%d]/s",nSiliPlanes));
 t->Branch("nHit",nHit,Form("nHit[%d]/s",nSiliPlanes));
 
 //// >>> GONIOMETER - FROM ASCII
-//Float_t gonio[nGonio];
-//
-//t->Branch("gonio",gonio,Form("gonio[%d]/F",nGonio));
+Float_t gonio[nGonio];
+
+t->Branch("gonio",gonio,Form("gonio[%d]/F",nGonio));
 
 // >>> DIGITIZER FAST ANALYSIS DATA (PH, TIME, ETCETERA) - FROM ASCII
 UShort_t digiBase[nDigiCh];    
@@ -137,9 +137,9 @@ ntree1->SetBranchAddress("Idigi_742b", &t_idigi_1[0]);
 ntree1->SetBranchAddress("Idigifast_742b", &t_idigifast_1[0]);
 
 // #2 - 1730
-UShort_t t_idigi_2[(lWfDummyPre+lWf2+lWfDummyPost)*nDigiCh2];
+//UShort_t t_idigi_2[(lWfDummyPre+lWf2+lWfDummyPost)*nDigiCh2];
 
-ntree2->SetBranchAddress("Idigi_730", &t_idigi_2[0]);
+//ntree2->SetBranchAddress("Idigi_730", &t_idigi_2[0]);
 
 // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 // vvv SCAN ON INPUT TEXT FILE
@@ -152,17 +152,18 @@ while(getline(myfile,line)) {
   std::stringstream ss(line);      
   for (Int_t i=0;i<nSiliPlanes;i++) ss >> xRaw[i];
   for (Int_t i=0;i<nSiliPlanes;i++) ss >> nStripHit[i];
-  for (Int_t i=0;i<nSiliPlanes;i++) ss >> nHit[i];
-  for (Int_t idigi=0;idigi<nDigiCh2;idigi++) ss >> digiBase[nDigiCh0+nDigiCh1+idigi] ;
-  for (Int_t idigi=0;idigi<nDigiCh2;idigi++) ss >> digiPh[nDigiCh0+nDigiCh1+idigi] ;
-  for (Int_t idigi=0;idigi<nDigiCh2;idigi++) ss >> digiTime[nDigiCh0+nDigiCh1+idigi] ;
-  for (Int_t idigi=0;idigi<nDigiCh2;idigi++) 0 >> digiTime05[nDigiCh0+nDigiCh1+idigi] ;  // dump
+  //for (Int_t i=0;i<nSiliPlanes;i++) ss >> nHit[i];
+  //for (Int_t idigi=0;idigi<nDigiCh2;idigi++) ss >> digiBase[nDigiCh0+nDigiCh1+idigi] ;
+  //for (Int_t idigi=0;idigi<nDigiCh2;idigi++) ss >> digiPh[nDigiCh0+nDigiCh1+idigi] ;
+  //for (Int_t idigi=0;idigi<nDigiCh2;idigi++) ss >> digiTime[nDigiCh0+nDigiCh1+idigi] ;
+  //for (Int_t idigi=0;idigi<nDigiCh2;idigi++) 0 >> digiTime05[nDigiCh0+nDigiCh1+idigi] ;  // dump
   for (Int_t idigi=0;idigi<(nDigiCh0+nDigiCh1);idigi++) ss >> digiBase[idigi] ;
   for (Int_t idigi=0;idigi<(nDigiCh0+nDigiCh1);idigi++) ss >> digiTime[idigi] ;
   for (Int_t idigi=0;idigi<(nDigiCh0+nDigiCh1);idigi++) ss >> digiTime05[idigi] ;
   for (Int_t idigi=0;idigi<(nDigiCh0+nDigiCh1);idigi++) ss >> digiPh[idigi] ;
   for (Int_t i=0;i<nGonio;i++) ss >> gonio[i];
-  ss >> eventNumber >> iTime >> iATime >> ntEv ;
+  ss >> iDummy >> iScan >> iDummy >> iDummy >> iDummy >> iDummy >> iDummy >> iDummy ;
+  ss >> eventNumber;
   
   // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
   // vvv LOOP ON ENTRIES IN TREE(S) FOR EACH EVENT IN TEXT FILE
@@ -171,7 +172,7 @@ while(getline(myfile,line)) {
     // GET SINGLE ENTRY
     ntree0->GetEntry(treevt);  // #0 - 1742
     ntree1->GetEntry(treevt);  // #1 - 1742
-    ntree2->GetEntry(treevt);  // #2 - 1730
+    //ntree2->GetEntry(treevt);  // #2 - 1730
     std::cout<<"--> event "<<t_eventNumber<<" in ROOT tree and "<<eventNumber<<" in ASCII"<<std::endl;
   
     // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
@@ -273,25 +274,25 @@ while(getline(myfile,line)) {
       // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
       // vvv UNPACK VARIABLES FROM TREE #2 - 1730
       
-      // >>> STANDARD WAVEFORMS (NO FAST WAVEFORMS HERE)
-      j=0;
-      k=nDigiCh0+nDigiCh1-1;
-      for (int ii=0; ii<(lWfDummyPre+lWf2+lWfDummyPost)*nDigiCh2; ii++){
-        if( ii%(lWfDummyPre+lWf2+lWfDummyPost)==0) {
-          j=0;
-          k++;
-        }
-        if(
-        (ii%(lWfDummyPre+lWf2+lWfDummyPost))>=lWfDummyPre && 
-        (ii%(lWfDummyPre+lWf2+lWfDummyPost))<(lWfDummyPre+lWf2)
-        ){  
-          wave[k][j]=t_idigi_2[ii];
-          j++;
-        }
-      }
-      
-      // ^^^ END OF UNPACK VARIABLES FROM TREE #2 - 1730
-      // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      //// >>> STANDARD WAVEFORMS (NO FAST WAVEFORMS HERE)
+      //j=0;
+      //k=nDigiCh0+nDigiCh1-1;
+      //for (int ii=0; ii<(lWfDummyPre+lWf2+lWfDummyPost)*nDigiCh2; ii++){
+      //  if( ii%(lWfDummyPre+lWf2+lWfDummyPost)==0) {
+      //    j=0;
+      //    k++;
+      //  }
+      //  if(
+      //  (ii%(lWfDummyPre+lWf2+lWfDummyPost))>=lWfDummyPre && 
+      //  (ii%(lWfDummyPre+lWf2+lWfDummyPost))<(lWfDummyPre+lWf2)
+      //  ){  
+      //    wave[k][j]=t_idigi_2[ii];
+      //    j++;
+      //  }
+      //}
+      //
+      //// ^^^ END OF UNPACK VARIABLES FROM TREE #2 - 1730
+      //// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       // FILL OUTPUT TREE WITH THE ASSOCIATED OBJECTS IN MEMORY
       t->Fill();
